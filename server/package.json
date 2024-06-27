@@ -1,0 +1,22 @@
+{
+  "name": "exam_submission_task",
+  "version": "1.0.0",
+  "description": "Find characters from House Arryn of the Eyrie and House Baelish of the Fingers appear in the same books",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon  src/index.js",
+    "kill": "sudo kill -9 $(sudo lsof -t -i:5080)"
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
+  }
+}
