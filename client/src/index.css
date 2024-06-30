@@ -298,3 +298,19 @@ label {
   display: flex;
   justify-content: flex-start;
 }
+
+.about {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.aboutinfo{ 
+  width: 70%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+}
