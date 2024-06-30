@@ -1,8 +1,8 @@
-import { Score } from "../models";
+import Score from "../models/score.model.js";
 
 export const getScoreHandler = async (req, res, next) => {
     try {
-        const data = Score.find({});
+        const data = await Score.find({});
 
         return res.status(201).json({
             message: 'new score has been added',
@@ -18,9 +18,9 @@ export const getScoreHandler = async (req, res, next) => {
 
 export const postScoreHandler = async (req, res, next) => {
     try {
-        const {Name, startTime, endTime, guesses, score, wordLength, repeated} = req.body;
+        const {Name, startTime, endTime, guesses, score, letterCount, letterRepeat} = req.body;
 
-        if (!Name || !startTime || !endTime || !guesses || !score || !wordLength || !repeated) {
+        if (!Name || !startTime || !endTime || !guesses || !score || !letterCount || !letterRepeat) {
             const error = new Error('Missing required fields');
             error.statusCode = 400; // Setting a custom status code
             return next(error);
@@ -32,8 +32,8 @@ export const postScoreHandler = async (req, res, next) => {
             endTime,
             guesses,
             score,
-            wordLength,
-            repeated
+            letterCount,
+            letterRepeat,
         });
 
         return res.status(201).json({
@@ -43,6 +43,7 @@ export const postScoreHandler = async (req, res, next) => {
           });
         
     } catch (err) {
+        console.log(err)
         const error = new Error(err.message);
         error.statusCode = 500; // Setting a custom status code
         return next(error);

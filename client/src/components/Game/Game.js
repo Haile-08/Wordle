@@ -1,23 +1,24 @@
 import { useEffect, useState } from 'react';
 import Wordle from './components/Wordle';
+import IntroModal from './components/IntroModal';
 
 function Game() {
-  const [solution, setSolution] = useState(null)
-
-  useEffect(() => {
-    fetch('http://localhost:3001/solutions')
-      .then(res => res.json())
-      .then(json => {
-        // random int between 0 & 14
-        const randomSolution = json[Math.floor(Math.random() * json.length)]
-        setSolution(randomSolution.word)
-      })
-  }, [setSolution])
+  const [solution, setSolution] = useState(null);
+  const [modal, setModal] = useState(false);
+  const [setting, setSetting] = useState({
+    letterCount: '',
+    letterRepeat: false,
+    startTime: '',
+  });
+  
+  useEffect(()=> {
+    setModal(true);
+  }, []);
 
   return (
-    <div className="App">
-      <h1>Wordle (Lingo)</h1>
-      {solution && <Wordle solution={solution} />}
+    <div className="Game">
+      {solution && <Wordle solution={solution} setting={setting}/>}
+      {modal && <IntroModal setSolution={setSolution} setSetting={setSetting} setting={setting} setModal={setModal}/>}
     </div>
   )
 }

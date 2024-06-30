@@ -1,7 +1,7 @@
 import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { useRouteError } from "react-router-dom";
-import { About, Game, Score } from "./components";
+import { About, Game, Layout, Score } from "./components";
 
 function ErrorPage() {
     const error = useRouteError();
@@ -22,23 +22,25 @@ const Routes = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Game />,
+      element: <Layout />,
       errorElement: <ErrorPage />,
-    },
-    {
-      path: "/game",
-      element: <Game />,
-      errorElement: <ErrorPage />,
-    },
-    {
-      path: "/about",
-      element: <About />,
-      errorElement: <ErrorPage />,
-    },
-    {
-      path: "/score",
-      element: <Score />,
-      errorElement: <ErrorPage />,
+      children: [
+        {
+          path: "/",
+          element: <Game />,
+          errorElement: <ErrorPage />,
+        },
+        {
+          path: "/about",
+          element: <About />,
+          errorElement: <ErrorPage />,
+        },
+        {
+          path: "/score",
+          element: <Score />,
+          errorElement: <ErrorPage />,
+        },
+      ]
     },
   ]);
 

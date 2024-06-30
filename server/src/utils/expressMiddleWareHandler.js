@@ -8,7 +8,7 @@ import bodyParser from 'body-parser';
  */
 const expressMiddleWareHandler = (app) =>{
   app.use(bodyParser.json());
-  app.use(cors());
+  app.use(cors({"origin": "*"}));
   app.use(morgan('common'));
 };
 

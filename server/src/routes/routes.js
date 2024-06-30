@@ -15,6 +15,7 @@ const expressRouteHandler = (app) => {
   // // auth router
   // scoreRoutHandler(router);
   wordRoutHandler(router);
+  scoreRoutHandler(router);
 };
 
 export default expressRouteHandler;

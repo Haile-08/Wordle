@@ -1,12 +1,14 @@
 import { useState } from 'react'
 
 const useWordle = (solution) => {
+  const [letterCount, setLetterCount] = useState(0);
+  const [score, setScore] = useState(0);
   const [turn, setTurn] = useState(0) 
   const [currentGuess, setCurrentGuess] = useState('')
   const [guesses, setGuesses] = useState([...Array(6)]) // each guess is an array
   const [history, setHistory] = useState([]) // each guess is a string
   const [isCorrect, setIsCorrect] = useState(false)
-  const [usedKeys, setUsedKeys] = useState({}) 
+  const [usedKeys, setUsedKeys] = useState({})
 
   // format a guess into an array of letter objects 
   // e.g. [{key: 'a', color: 'yellow'}]
@@ -19,16 +21,18 @@ const useWordle = (solution) => {
     // find any green letters
     formattedGuess.forEach((l, i) => {
       if (solution[i] === l.key) {
-        formattedGuess[i].color = 'green'
-        solutionArray[i] = null
+        formattedGuess[i].color = 'green';
+        solutionArray[i] = null;
+        setScore(prev => prev + 2);
       }
     })
     
     // find any yellow letters
     formattedGuess.forEach((l, i) => {
       if (solutionArray.includes(l.key) && l.color !== 'green') {
-        formattedGuess[i].color = 'yellow'
-        solutionArray[solutionArray.indexOf(l.key)] = null
+        formattedGuess[i].color = 'yellow';
+        solutionArray[solutionArray.indexOf(l.key)] = null;
+        setScore(prev => prev + 1);
       }
     })
 
@@ -40,6 +44,7 @@ const useWordle = (solution) => {
   // add one to the turn state
   const addNewGuess = (formattedGuess) => {
     if (currentGuess === solution) {
+      setScore(prev => prev * (6 - turn));
       setIsCorrect(true)
     }
     setGuesses(prevGuesses => {
@@ -92,8 +97,8 @@ const useWordle = (solution) => {
         return
       }
       // check word is 5 chars
-      if (currentGuess.length !== 5) {
-        console.log('word must be 5 chars.')
+      if (currentGuess.length !== letterCount) {
+        console.log(`word must be ${letterCount} chars.`)
         return
       }
       const formatted = formatGuess()
@@ -104,13 +109,14 @@ const useWordle = (solution) => {
       return
     }
     if (/^[A-Za-z]$/.test(key)) {
-      if (currentGuess.length < 5) {
+      console.log(letterCount);
+      if (currentGuess.length < letterCount) {
         setCurrentGuess(prev => prev + key)
       }
     }
   }
 
-  return {turn, currentGuess, guesses, isCorrect, usedKeys, handleKeyup}
+  return {setLetterCount, turn, score, currentGuess, guesses, isCorrect, usedKeys, handleKeyup}
 }
 
 export default useWordle

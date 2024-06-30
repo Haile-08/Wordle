@@ -17,7 +17,7 @@ const scoreSchema = new Schema({
     required: true,
   },
   guesses: {
-    type: Number,
+    type: Array,
     required: true,
     default: 0,
   },
@@ -26,12 +26,12 @@ const scoreSchema = new Schema({
     required: true,
     default: 0,
   },
-  wordLength: {
+  letterCount: {
     type: Number,
     required: true,
     min: 1,
   },
-  repeated: {
+  letterRepeat: {
     type: Boolean,
     required: true,
   },

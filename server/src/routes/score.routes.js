@@ -1,4 +1,4 @@
-import { getScoreHandler, postScoreHandler } from "../controller/score.controller";
+import { getScoreHandler, postScoreHandler } from "../controller/score.controller.js";
 
 const scoreRoutHandler = (router) => {
   router.get('/score', getScoreHandler);

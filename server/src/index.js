@@ -1,5 +1,5 @@
 import express from 'express';
-import {  expressGlobalErrorHandler, expressMiddleWareHandler, serverInitHandler } from './utils/index.js';
+import {  expressConnectDB, expressGlobalErrorHandler, expressMiddleWareHandler, serverInitHandler } from './utils/index.js';
 import expressRouteHandler from './routes/routes.js';
 
 
