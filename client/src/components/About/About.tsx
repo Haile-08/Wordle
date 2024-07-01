@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-function About() {
+const About: React.FC = () => {
   return (
     <div className='about'>
       <h1>How To Play</h1>
@@ -12,7 +12,7 @@ function About() {
         <p>- User can decide how many letters the word should have and whether it can contain repeated letters</p>
       </div>
     </div>
-  )
+  );
 }
 
-export default About
+export default About;
